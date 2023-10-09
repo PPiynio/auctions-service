@@ -109,5 +109,8 @@ public class AuctionService {
         return auctionRepository.findAuctionBy(query);
     }
 
+    public List<Auction> getByLowestPrice(Double initialPrice) {
+        return auctionRepository.findByPrice(initialPrice);
+    }
 
 }

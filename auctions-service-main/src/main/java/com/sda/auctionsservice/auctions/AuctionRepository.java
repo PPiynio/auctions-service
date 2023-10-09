@@ -20,4 +20,7 @@ public interface AuctionRepository extends JpaRepository<Auction, Integer> {
 //    @Query(value = "Select * FROM auction a WHERE a.name LIKE %:query% or a.description LIKE %:query% ", nativeQuery = true)
     @Query(value = "Select a FROM Auction a WHERE a.name LIKE %:query% or a.description LIKE %:query% ")
     List<Auction> findAuctionBy(String query);
+    @Query(value = "Select a FROM Auction a WHERE a.initialPrice < :initialPrice")
+    List<Auction> findByPrice(Double initialPrice);
+
 }

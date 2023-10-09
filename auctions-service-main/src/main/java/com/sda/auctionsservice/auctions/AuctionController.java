@@ -50,6 +50,7 @@ public class AuctionController {
 
     @GetMapping
     public List<Auction> getAllAuctions() {
+        System.out.println("abc");
         return service.getAllAuctions();
     }
 
@@ -64,5 +65,8 @@ public class AuctionController {
     public List<Auction> getAuctionsByString(@RequestParam("query") String query) {
         return service.getAuctionsByQueryString(query);
     }
-
+    @GetMapping("/byLowestPrice")
+    public List<Auction> getByLowestPrice(@RequestParam ("price") Double price) {
+        return service.getByLowestPrice(price);
+    }
 }

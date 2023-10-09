@@ -44,15 +44,15 @@ public class JdbcSecurityConfig {
         httpSecurity
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
 
-        httpSecurity
-                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
-                    authorizationManagerRequestMatcherRegistry
-                            .requestMatchers("/auctions/**")
-                            .hasAnyAuthority("USER")
-                            .anyRequest()
-                            .permitAll();
-
-                });
+//        httpSecurity
+//                .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
+//                    authorizationManagerRequestMatcherRegistry
+//                            .requestMatchers("/auctions/**")
+//                            .hasAnyAuthority("USER")
+//                            .anyRequest()
+//                            .permitAll();
+//
+//                });
 
         return httpSecurity.build();
     }

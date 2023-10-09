@@ -136,5 +136,18 @@ class AuctionControllerTest {
                 .exchange()
                 .expectStatus().isBadRequest();
     }
+    @Test
+    void shouldReturnAuctionsFilteredByPrice(@Autowired WebTestClient testClient) {
+        List auctionList = testClient
+                .get()
+                .uri("/auctions/byLowestPrice?price=2")
+                .headers(headersConsumer -> headersConsumer.setBasicAuth("user", "password"))
+                .exchange()
+                .expectStatus().isOk()
+                .expectHeader().contentType("application/json")
+                .expectBody(List.class).returnResult().getResponseBody();
+        System.out.println(auctionList);
+        assertEquals(1, auctionList.size());
+    }
 
 }
