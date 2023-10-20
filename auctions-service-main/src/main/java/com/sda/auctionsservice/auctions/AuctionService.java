@@ -78,6 +78,7 @@ public class AuctionService {
     }
 
     ResponseEntity<Object> deleteAuction(Integer id) {
+
         //        if (repository.findById(id).isPresent()) {
 //            repository.deleteById(id);
 //            return ResponseEntity.noContent().build();

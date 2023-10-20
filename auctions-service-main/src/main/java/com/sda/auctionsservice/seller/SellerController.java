@@ -1,6 +1,7 @@
 package com.sda.auctionsservice.seller;
 
 import com.sda.auctionsservice.auctions.Auction;
+import com.sda.auctionsservice.dto.SellerReviewDTO;
 import jakarta.validation.Valid;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.web.bind.annotation.*;
@@ -26,5 +27,8 @@ public class SellerController {
     public Iterable<Auction> getAuctionsForSeller(@PathVariable Integer id) {
        return service.findById(id);
     }
-
+    @PostMapping("/review")
+    public SellerReview createReview(@RequestBody @Valid SellerReviewDTO sellerReview) {
+        return service.createReview(sellerReview);
+    }
 }

@@ -1,6 +1,8 @@
 package com.sda.auctionsservice.seller;
 
 import com.sda.auctionsservice.auctions.Auction;
+import com.sda.auctionsservice.dto.SellerReviewDTO;
+import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,26 @@ import java.util.Set;
 public class SellerService {
 
     private final SellerRepository repository;
+    private final SellerReviewRepository sellerReviewRepository;
 
-    public SellerService(SellerRepository repository) {
+    public SellerService(SellerRepository repository, SellerReviewRepository reviewRepository) {
         this.repository = repository;
+        this.sellerReviewRepository = reviewRepository;
+    }
+    SellerReview createReview(SellerReviewDTO sellerReviewDTO) {
+        System.out.println(sellerReviewDTO.getSellerId());
+        Optional<Seller> seller = repository.findById(sellerReviewDTO.getSellerId());
+        if (seller.isPresent()){
+            SellerReview sellerReview = new SellerReview(
+                    sellerReviewDTO.getRate(),
+                    sellerReviewDTO.getComment(),
+                    seller.get(),
+                    sellerReviewDTO.getReviewerId()
+            );
+            return sellerReviewRepository.save(sellerReview);
+        }
+
+        throw new EntityNotFoundException("Cannot find seller for seller id");
     }
 
     Seller save(Seller seller) {
